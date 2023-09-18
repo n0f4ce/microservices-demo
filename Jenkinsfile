@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        PATH = "/usr/bin:$PATH"
-    }
-
     stages {
         stage('Checkout Source') {
             steps {
@@ -17,7 +13,7 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    sh 'kubectl apply -f ./release/kubernetes-manifests.yaml'
+                    sh '/usr/bin/kubectl apply -f ./release/kubernetes-manifests.yaml'
                 }
             }
         }
@@ -26,7 +22,7 @@ pipeline {
             steps {
                 // Get pods status
                 script {
-                    sh 'kubectl get pods'
+                    sh '/usr/bin/kubectl get pods'
                 }
             }
         }
