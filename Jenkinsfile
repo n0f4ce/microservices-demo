@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    bat 'kubectl apply ./release/kubernetes-manifests.yaml'
+                    bat 'kubectl apply -f ./release/kubernetes-manifests.yaml'
                 }
             }
         }
