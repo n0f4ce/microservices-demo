@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    sh '/usr/bin/kubectl apply -f ./release/kubernetes-manifests.yaml'
+                    sh '/usr/bin/kubectl apply -f ${workspace}/release/kubernetes-manifests.yaml'
                 }
             }
         }
