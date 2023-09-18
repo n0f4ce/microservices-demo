@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    sh '/usr/bin/kubectl apply -f ${workspace}/release/kubernetes-manifests.yaml'
+                    bat 'kubectl apply -f ${workspace}/release/kubernetes-manifests.yaml'
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 // Get pods status
                 script {
-                    sh '/usr/bin/kubectl get pods'
+                    bat 'kubectl get pods'
                 }
             }
         }
