@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    bar 'kubectl config get-contexts'
+                    bat 'kubectl config get-contexts'
                     bat 'kubectl apply -f ./release/kubernetes-manifests.yaml --context docker-desktop'
                 }
             }
