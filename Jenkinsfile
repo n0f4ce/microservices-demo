@@ -13,8 +13,8 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    sh 'kubectl config get-contexts'
-                    sh 'kubectl apply -f ./release/kubernetes-manifests.yaml -n jenkins'
+                    sh '/usr/local/bin/kubectl config get-contexts'
+                    sh '/usr/local/bin/kubectl apply -f ./release/kubernetes-manifests.yaml -n jenkins'
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 // Get pods status
                 script {
-                    sh 'kubectl get pods -n jenkins'
+                    sh '/usr/local/bin/kubectl get pods -n jenkins'
                 }
             }
         }
