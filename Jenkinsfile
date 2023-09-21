@@ -13,9 +13,9 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    sh 'ls -l /usr/local/bin'
-                    sh '/usr/local/bin/kubectl config get-contexts'
-                    sh '/usr/local/bin/kubectl apply -f ./release/kubernetes-manifests.yaml -n jenkins'
+                    sh 'ls -l /tmp'
+                    sh '/tmp/kubectl config get-contexts'
+                    sh '/tmp/kubectl apply -f ./release/kubernetes-manifests.yaml -n jenkins'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 // Get pods status
                 script {
-                    sh '/usr/local/bin/kubectl get pods -n jenkins'
+                    sh '/tmp/kubectl get pods -n jenkins'
                 }
             }
         }
