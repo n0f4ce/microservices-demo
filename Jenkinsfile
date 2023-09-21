@@ -13,8 +13,8 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    bat 'kubectl config get-contexts'
-                    bat 'kubectl apply -f ./release/kubernetes-manifests.yaml --context docker-desktop'
+                    sh 'kubectl config get-contexts'
+                    sh 'kubectl apply -f ./release/kubernetes-manifests.yaml -n jenkins'
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 // Get pods status
                 script {
-                    bat 'kubectl get pods --context docker-desktop'
+                    sh 'kubectl get pods -n jenkins'
                 }
             }
         }
