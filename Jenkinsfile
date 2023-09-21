@@ -13,6 +13,7 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
+                    sh 'ls -l /usr/local/bin'
                     sh '/usr/local/bin/kubectl config get-contexts'
                     sh '/usr/local/bin/kubectl apply -f ./release/kubernetes-manifests.yaml -n jenkins'
                 }
