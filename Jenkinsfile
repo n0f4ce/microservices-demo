@@ -18,10 +18,6 @@ pipeline {
         image: n0face/custom-jenkins-inbound:latest
         imagePullPolicy: IfNotPresent
         workingDir: "/home/jenkins/agent"
-        resources:
-          requests:
-            cpu: "512m"
-            memory: "512Mi"
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
