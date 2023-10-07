@@ -15,7 +15,7 @@ pipeline {
             spec:
               containers:
               - name: jnlp
-                image: jenkins/inbound-agent:latest
+                image: n0face/custom-jenkins-inbound:latest
                 imagePullPolicy: IfNotPresent
                 workingDir: "/home/jenkins/agent"
                 resources:
@@ -35,9 +35,6 @@ pipeline {
     stages {
 
         stage('Set Number of Executors') {
-            agent {
-                label 'jenkins-agent-1'
-            }
             steps {
                 // Set the number of executors on the Jenkins agent
                 sh """
@@ -57,9 +54,6 @@ pipeline {
         }
       
         stage('Checkout Source') {
-            agent {
-                label 'jenkins-agent-1'
-            }
             steps {
                 // Checkout the source code from the GitHub repository
                 git branch: 'main', url: 'https://github.com/n0f4ce/microservices-demo.git', credentialsId: 'github'
@@ -67,9 +61,6 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            agent {
-                label 'jenkins-agent-1'
-            }
             steps {
                 // Apply Kubernetes manifests
                 script {
@@ -82,9 +73,6 @@ pipeline {
         }
 
         stage('Get Pods Status') {
-            agent {
-                label 'jenkins-agent-1'
-            }
             steps {
                 // Get pods status
                 script {
