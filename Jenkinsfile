@@ -29,6 +29,21 @@ pipeline {
           runAsUser: 1000
           runAsGroup: 1000
           fsGroup: 1000
+      - name: jnlp2
+        image: n0face/custom-jenkins-inbound:latest
+        imagePullPolicy: IfNotPresent
+        workingDir: "/home/jenkins/agent"
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "1Gi"
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          fsGroup: 1000
       serviceAccountName: jenkins
     """
         }
