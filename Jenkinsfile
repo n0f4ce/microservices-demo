@@ -4,7 +4,7 @@ pipeline {
             cloud 'minikube1'
             label 'jenkins-agent-1'
             defaultContainer 'jnlp'
-            containerCap: 10
+            containerCap(10)
         }
     }
 
