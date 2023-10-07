@@ -1,8 +1,8 @@
 pipeline {
     agent {
         kubernetes {
-            cloud 'minikube1'  // Specify the Kubernetes cloud by name
-            label 'jenkins-agent-1'  // Specify the agent label for the build
+            cloud 'minikube1'
+            label 'jenkins-agent-1'
             defaultContainer 'jnlp'
             yaml """apiVersion: v1
 kind: Pod
@@ -10,7 +10,7 @@ metadata:
   labels:
     jenkins: agent
     jenkins/label: jenkins-agent-1
-  namespace: jenkins  // Specify the namespace
+  namespace: jenkins
 spec:
   containers:
   - name: jnlp
@@ -25,9 +25,9 @@ spec:
       runAsUser: 1000
       runAsGroup: 1000
       fsGroup: 1000
-  serviceAccountName: jenkins  // Specify the service account
+  serviceAccountName: jenkins
 """
-            containerCap: 10  // Specify the maximum number of executors
+            containerCap: 10
         }
     }
 
