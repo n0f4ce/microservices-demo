@@ -4,8 +4,7 @@ pipeline {
             cloud 'minikube1'  // Specify the Kubernetes cloud by name
             label 'jenkins-agent-1'  // Specify the agent label for the build
             defaultContainer 'jnlp'
-            yaml """
-apiVersion: v1
+            yaml """apiVersion: v1
 kind: Pod
 metadata:
   labels:
