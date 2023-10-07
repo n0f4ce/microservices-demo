@@ -41,9 +41,9 @@ pipeline {
             cpu: "2000m"
             memory: "2Gi"
         securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
-          fsGroup: 1000
+          runAsUser: 1001
+          runAsGroup: 1001
+          fsGroup: 1001
       serviceAccountName: jenkins
     """
         }
