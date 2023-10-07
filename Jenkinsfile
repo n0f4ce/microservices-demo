@@ -1,9 +1,43 @@
 pipeline {
-    agent { label 'jenkins-agent-1' }
+    agent {
+        kubernetes {
+            cloud 'minikube1'  // Specify the Kubernetes cloud by name
+            label 'jenkins-agent-1'  // Specify the agent label for the build
+            defaultContainer 'jnlp'
+            yaml """
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              labels:
+                jenkins: agent
+                jenkins/label: jenkins-agent-1
+              namespace: jenkins  // Specify the namespace
+            spec:
+              containers:
+              - name: jnlp
+                image: jenkins/inbound-agent:latest
+                imagePullPolicy: IfNotPresent
+                workingDir: "/home/jenkins/agent"
+                resources:
+                  requests:
+                    cpu: "512m"
+                    memory: "512Mi"
+                securityContext:
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                  fsGroup: 1000
+              serviceAccountName: jenkins  // Specify the service account
+            """
+            containerCap: 10  // Specify the maximum number of executors
+        }
+    }
 
     stages {
 
         stage('Set Number of Executors') {
+            agent {
+                label 'jenkins-agent-1'
+            }
             steps {
                 // Set the number of executors on the Jenkins agent
                 sh """
@@ -23,6 +57,9 @@ pipeline {
         }
       
         stage('Checkout Source') {
+            agent {
+                label 'jenkins-agent-1'
+            }
             steps {
                 // Checkout the source code from the GitHub repository
                 git branch: 'main', url: 'https://github.com/n0f4ce/microservices-demo.git', credentialsId: 'github'
@@ -30,6 +67,9 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
+            agent {
+                label 'jenkins-agent-1'
+            }
             steps {
                 // Apply Kubernetes manifests
                 script {
@@ -42,6 +82,9 @@ pipeline {
         }
 
         stage('Get Pods Status') {
+            agent {
+                label 'jenkins-agent-1'
+            }
             steps {
                 // Get pods status
                 script {
