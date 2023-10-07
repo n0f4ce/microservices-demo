@@ -4,29 +4,6 @@ pipeline {
             cloud 'minikube1'
             label 'jenkins-agent-1'
             defaultContainer 'jnlp'
-            yaml """apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    jenkins: agent
-    jenkins/label: jenkins-agent-1
-  namespace: jenkins
-spec:
-  containers:
-  - name: jnlp
-    image: n0face/custom-jenkins-inbound:latest
-    imagePullPolicy: IfNotPresent
-    workingDir: "/home/jenkins/agent"
-    resources:
-      requests:
-        cpu: "512m"
-        memory: "512Mi"
-    securityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-  serviceAccountName: jenkins
-"""
             containerCap: 10
         }
     }
