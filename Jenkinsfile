@@ -3,8 +3,6 @@ pipeline {
         kubernetes {
             cloud 'minikube1'
             label 'jenkins-agent-1'
-            defaultContainer 'jnlp'
-            containerCap '2'
             yaml """
     apiVersion: v1
     kind: Pod
@@ -30,6 +28,21 @@ pipeline {
           runAsUser: 1000
           runAsGroup: 1000
           fsGroup: 1000
+      - name: jnlp2
+        image: n0face/custom-jenkins-inbound:latest
+        imagePullPolicy: IfNotPresent
+        workingDir: "/home/jenkins/agent"
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "1Gi"
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+        securityContext:
+          runAsUser: 1001
+          runAsGroup: 1001
+          fsGroup: 1001
       serviceAccountName: jenkins
     """
         }
