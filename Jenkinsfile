@@ -5,35 +5,34 @@ pipeline {
             label 'jenkins-agent-1'  // Specify the agent label for the build
             defaultContainer 'jnlp'
             yaml """
-            apiVersion: v1
-            kind: Pod
-            metadata:
-              labels:
-                jenkins: agent
-                jenkins/label: jenkins-agent-1
-              namespace: jenkins  // Specify the namespace
-            spec:
-              containers:
-              - name: jnlp
-                image: n0face/custom-jenkins-inbound:latest
-                imagePullPolicy: IfNotPresent
-                workingDir: "/home/jenkins/agent"
-                resources:
-                  requests:
-                    cpu: "512m"
-                    memory: "512Mi"
-                securityContext:
-                  runAsUser: 1000
-                  runAsGroup: 1000
-                  fsGroup: 1000
-              serviceAccountName: jenkins  // Specify the service account
-            """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    jenkins: agent
+    jenkins/label: jenkins-agent-1
+  namespace: jenkins  // Specify the namespace
+spec:
+  containers:
+  - name: jnlp
+    image: n0face/custom-jenkins-inbound:latest
+    imagePullPolicy: IfNotPresent
+    workingDir: "/home/jenkins/agent"
+    resources:
+      requests:
+        cpu: "512m"
+        memory: "512Mi"
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+  serviceAccountName: jenkins  // Specify the service account
+"""
             containerCap: 10  // Specify the maximum number of executors
         }
     }
 
     stages {
-
         stage('Set Number of Executors') {
             steps {
                 // Set the number of executors on the Jenkins agent
