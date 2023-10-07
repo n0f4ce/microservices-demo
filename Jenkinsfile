@@ -22,7 +22,7 @@ pipeline {
           requests:
             cpu: "1000m"
             memory: "1Gi"
-          limit:
+          limits:
             cpu: "2000m"
             memory: "2Gi"
         securityContext:
