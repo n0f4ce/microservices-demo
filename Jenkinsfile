@@ -1,4 +1,4 @@
-podTemplate {
+podTemplate(cloud: 'minikube1') {
   node(POD_LABEL) {
     stages {
         stage('Checkout Source') {
