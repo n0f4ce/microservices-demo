@@ -7,7 +7,7 @@ pipeline {
   }
 
   environment {
-    GIT_EXECUTABLE='/usr/bin/git'
+    env.GIT_EXECUTABLE='/usr/bin/git'
   }
 
   stages {
