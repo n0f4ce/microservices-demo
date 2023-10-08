@@ -1,9 +1,6 @@
 pipeline {
   agent {
-    kubernetes {
-      cloud 'minikube1'
-      label 'jenkins-agent-1'
-    }
+    node 'jenkins-agent-1'
   }
 
   stages {
@@ -11,8 +8,8 @@ pipeline {
             steps {
                 sh 'which git'
                 // Checkout the source code from the GitHub repository
-                //git branch: 'main', url: 'https://github.com/n0f4ce/microservices-demo.git', credentialsId: 'github'
-                sh(script: '/usr/bin/git clone https://github.com/n0f4ce/microservices-demo.git')
+                git branch: 'main', url: 'https://github.com/n0f4ce/microservices-demo.git', credentialsId: 'github'
+                //sh(script: '/usr/bin/git clone https://github.com/n0f4ce/microservices-demo.git')
             }
         }
 
