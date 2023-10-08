@@ -18,8 +18,7 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    sh 'ls -l /tmp'
-                    sh 'kubectl config get-contexts'
+                    sh 'ls -l /home/jenkins/agent/workspace/demo-pipeline'
                     // Run the 'kubectl apply' command one by one, waiting for each command to finish before running the next one
                     sh 'kubectl apply -f ./release/kubernetes-manifests.yaml -n jenkins'
                 }
