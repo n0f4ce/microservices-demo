@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Source') {
             steps {
                 // Checkout the source code from the GitHub repository
-                sh "git branch: 'main', url: 'https://github.com/n0f4ce/microservices-demo.git', credentialsId: 'github'"
+                git branch: 'main', url: 'https://github.com/n0f4ce/microservices-demo.git', credentialsId: 'github'
             }
         }
 
