@@ -1,5 +1,4 @@
-podTemplate(cloud: 'minikube1') {
-  node('jenkins-agent-1') {
+podTemplate(cloud: 'minikube1', label: 'jenkins-agent-1') {
     stages {
         stage('Checkout Source') {
             steps {
@@ -30,5 +29,4 @@ podTemplate(cloud: 'minikube1') {
             }
         }
     }
-  }
 }
