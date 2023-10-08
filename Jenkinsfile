@@ -1,5 +1,12 @@
-podTemplate(cloud: 'minikube1', label: 'jenkins-agent-1') {
-    stages {
+pipeline {
+  agent {
+    kubernetes {
+      cloud 'minikube1'
+      label 'jenkins-agent-1'
+    }
+  }
+
+  stages {
         stage('Checkout Source') {
             steps {
                 // Checkout the source code from the GitHub repository
