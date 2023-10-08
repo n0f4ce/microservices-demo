@@ -6,6 +6,10 @@ pipeline {
     }
   }
 
+  environment {
+    GIT_EXECUTABLE='/usr/bin/git'
+  }
+
   stages {
         stage('Checkout Source') {
             steps {
