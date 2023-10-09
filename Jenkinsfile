@@ -17,7 +17,7 @@ pipeline {
             steps {
                 // Apply Kubernetes manifests
                 script {
-                    sh 'ls -l /home/jenkins/agent/workspace/demo-pipeline'
+                    sh 'ls -l /home/jenkins/agent/workspace/gcp-microservice/'
                     // Run the 'kubectl apply' command one by one, waiting for each command to finish before running the next one
                     sh 'kubectl apply -f ./release/kubernetes-manifests.yaml -n jenkins'
                 }
